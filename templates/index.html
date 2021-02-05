@@ -1,0 +1,66 @@
+<HTML>
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <title>gpt2-food-reviews-maker<</title>
+    </head>
+    <body>
+        <div class = "container">
+            <div class="jumbotron mt-3">
+
+                <h1>gpt2-colloquial</h1>
+                <h3>generate colloquial based on start message </h3>
+
+                <hr class="solid">
+
+                <h2>How to use</h2>
+                <div id="usage">
+                    <p>1. input start message</p>
+                    <p>2. Press the Run button and wait for about 3 seconds to get the result.</p>
+                </div>
+
+
+                <hr class="solid">
+                <h2>Example</h2>
+                <div id="usage">
+                  <h5>if review title is 'My name is'  you can checkout the result like this</h5>
+                </div>
+                <hr class="solid">
+                <p>
+                My name is: Seorin Park, a junior majoring in electrical engineering.
+  <p/>
+
+                <hr class="solid">
+                <h2>Make your own colloquial </h2>
+                <p>Please enter start message below</p>
+                <input id='review'>
+                <button onclick='printName()'>RUN</button>
+                <p></p>
+                <script type="text/javascript">
+                 function printName()  {
+                   const review = document.getElementById('review').value;
+
+                   fetch('/api/?input='+review).then(function(response){
+                     response.text().then(function(text){
+                       document.getElementById("result").innerText = text;
+                     })
+                   })
+                 }
+               </script>
+                  <hr class="solid">
+                <h2>your generated colloquial</h2>
+                  <hr class="solid">
+                <div id='result'></div>
+
+    </div>
+            </div>
+        </div>
+    </body>
+</HTML>
