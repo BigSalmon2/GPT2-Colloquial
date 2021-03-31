@@ -16,8 +16,8 @@ BATCH_SIZE = 1
 CHECK_INTERVAL = 0.1
 
 
-tokenizer = AutoTokenizer.from_pretrained("jihopark/colloquial")
-model = AutoModelWithLMHead.from_pretrained("jihopark/colloquial", return_dict=True)
+tokenizer = AutoTokenizer.from_pretrained("huggingtweets/emailoctopus")
+model = AutoModelWithLMHead.from_pretrained("huggingtweets/emailoctopus", return_dict=True)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 
@@ -42,7 +42,7 @@ def handle_requests_by_batch():
 # 쓰레드
 threading.Thread(target=handle_requests_by_batch).start()
 
-def run_model(prompt, num=1, length=30):
+def run_model(prompt, num=50, length=1):
     try:
         prompt = prompt.strip()
         input_ids = tokenizer.encode(prompt, return_tensors='pt')
@@ -56,10 +56,10 @@ def run_model(prompt, num=1, length=30):
         # model = models[model_name]
         sample_outputs = model.generate(input_ids, pad_token_id=50256,
                                         do_sample=True,
-                                        max_length=300,
-
+                                        max_length=length,
+                                        num_beams=50,
                                         top_k=50,
-                                        num_return_sequences=num)
+                                        num_return_sequences=50)
         generated_texts = ""
         for i, sample_output in enumerate(sample_outputs):
             output = tokenizer.decode(sample_output.tolist(),skip_special_tokens=False)
