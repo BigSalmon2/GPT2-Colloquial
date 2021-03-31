@@ -6,8 +6,8 @@ from queue import Queue, Empty
 import time
 import threading
 
-tokenizer = AutoTokenizer.from_pretrained("jihopark/colloquial")
-model = AutoModelWithLMHead.from_pretrained("jihopark/colloquial", return_dict=True)
+tokenizer = AutoTokenizer.from_pretrained("huggingtweets/emailoctopus")
+model = AutoModelWithLMHead.from_pretrained("huggingtweets/emailoctopus", return_dict=True)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 
